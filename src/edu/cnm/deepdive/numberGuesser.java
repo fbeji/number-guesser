@@ -10,41 +10,44 @@ public class numberGuesser {
   private static Scanner input = new Scanner(System.in);
 
   public static void main(String[] args) {
+
+
+    while (playOneRound());
+  }
+
+  private static boolean playOneRound() {
     boolean playAgain;
+    boolean guessAgain;
+    int guess;
+    int randomized;
 
+    randomized = random.nextInt(100) + 1;
+    System.out.println("Please input a number between 1 and 100. Press 0 to give up.");
     do {
-      boolean guessAgain;
-      int guess;
-      int randomized;
+      guess = input.nextInt();
+      if (guess == 0) {
+        guessAgain = false;
+      } else if (guess < randomized) {
+        System.out.println("That's too low");
+        guessAgain = true;
+      } else if (guess > randomized) {
+        System.out.println("That's too high");
+        guessAgain = true;
+      } else {
 
-      randomized = random.nextInt(100) + 1;
-      System.out.println("Please input a number between 1 and 100. Press 0 to give up.");
-      do {
-        guess = input.nextInt();
-        if (guess == 0) {
-          guessAgain = false;
-        } else if (guess < randomized) {
-          System.out.println("That's too low");
-          guessAgain = true;
-        } else if (guess > randomized) {
-          System.out.println("That's too high");
-          guessAgain = true;
-        } else {
+        System.out.println("That's right!");
+        guessAgain = false;
 
-          System.out.println("That's right!");
-          guessAgain = false;
-
-        }
+      }
 
 
-      } while (guessAgain);
-      System.out.println("Do you want to play again? Yes or no");
-      String answer;
-      do {
-        answer = input.nextLine().trim().toLowerCase();
-      } while (answer.isEmpty());
-      playAgain = answer.charAt(0) == 'y' ;
-
-    } while (playAgain);
+    } while (guessAgain);
+    System.out.println("Do you want to play again? Yes or no");
+    String answer;
+    do {
+      answer = input.nextLine().trim().toLowerCase();
+    } while (answer.isEmpty());
+    playAgain = answer.charAt(0) == 'y' ;
+    return playAgain;
   }
 }
